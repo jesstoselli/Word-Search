@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/margin_standard"
+    tools:background="@color/zinc_1000"
+    tools:context=".ui.fragments.ErrorFragment">
+
+    <ImageView
+        android:id="@+id/imageView_alertCircle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/content_description_alert_icon"
+        android:src="@drawable/ic_alert_circle"
+        app:layout_constraintBottom_toTopOf="@id/textView_errorMessage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <TextView
+        android:id="@+id/textView_errorMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/margin_large"
+        android:fontFamily="@font/inter_medium"
+        android:lineSpacingExtra="20sp"
+        android:text="@string/error_message"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="@dimen/font_medium"
+        app:layout_constraintBottom_toTopOf="@id/btn_return"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imageView_alertCircle" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_return"
+        style="@style/ButtonSecondary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_extralarge"
+        android:text="@string/btn_return"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textView_errorMessage"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

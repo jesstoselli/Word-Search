@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">Coodesh Challenge - Word Search</string>
+
+    <!--    Fragments   -->
+    <string name="title_dictionary">Dictionary</string>
+    <string name="title_history">History</string>
+    <string name="title_favorites">Favorites</string>
+    <string name="title_error">Error</string>
+    <string name="title_word_page">Word Page</string>
+
+    <!--    Error Page     -->
+    <string name="error_message">Sorry, something went wrong.</string>
+    <string name="btn_return">Return</string>
+
+    <!--    Word Page     -->
+    <string name="hear_the_word">Hear the word</string>
+    <string name="meanings">Meanings</string>
+    <string name="example">Example:</string>
+
+    <string name="back">Back</string>
+    <string name="next_word">Next Word</string>
+
+    <!--    Content Description     -->
+    <string name="content_description_outline_heart_icon">Outline heart icon</string>
+    <string name="content_description_alert_icon">Alert icon</string>
+</resources>

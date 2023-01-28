@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    tools:background="@color/zinc_800"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/textView_definition"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/inter"
+        android:textColor="@color/white"
+        android:textSize="@dimen/font_regular"
+        tools:text="Verb - “Hello!” or an equivalent greeting." />
+
+    <TextView
+        android:id="@+id/textView_exampleTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/inter_medium"
+        android:text="@string/example"
+        android:textColor="@color/zinc_500"
+        android:layout_marginTop="@dimen/margin_standard"
+        android:textSize="@dimen/font_regular"
+        tools:text="Example:" />
+
+    <TextView
+        android:id="@+id/textView_example"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_half"
+        android:fontFamily="@font/inter"
+        android:textColor="@color/white"
+        android:textSize="@dimen/font_regular"
+        tools:text="“Hello, Mark! How are you?”" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/zinc_500"
+        android:layout_marginVertical="@dimen/margin_standard" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>
