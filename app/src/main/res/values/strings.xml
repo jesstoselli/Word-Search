@@ -17,6 +17,8 @@
     <string name="meanings">Meanings</string>
     <string name="example">Example:</string>
 
+    <string name="no_audio">Sorry, we currently have no audio for this word\'s phonetics.</string>
+
     <string name="back">Back</string>
     <string name="next_word">Next Word</string>
 

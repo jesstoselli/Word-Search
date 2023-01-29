@@ -13,4 +13,7 @@
     <color name="zinc_500">#71717A</color>
     <color name="accent_magenta">#F72585</color>
     <color name="white">#F9F9F9</color>
+
+
+    <color name="shimmer_placeholder">#C2C2C2</color>
 </resources>

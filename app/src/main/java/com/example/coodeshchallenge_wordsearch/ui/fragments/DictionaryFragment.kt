@@ -4,14 +4,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.coodeshchallenge_wordsearch.databinding.FragmentDictionaryBinding
 import com.example.coodeshchallenge_wordsearch.ui.DictionaryViewModel
 import com.example.coodeshchallenge_wordsearch.ui.fragments.adapters.WordsListAdapter
+import com.example.coodeshchallenge_wordsearch.utils.toFirstCapitalLetters
 import org.koin.android.ext.android.inject
+import java.util.*
 
 class DictionaryFragment : Fragment() {
 
@@ -39,7 +40,8 @@ class DictionaryFragment : Fragment() {
 
         viewModel.navigateToWordPage.observe(viewLifecycleOwner, Observer { word ->
             if (word != null) {
-                val action = DictionaryFragmentDirections.actionNavigationDictionaryToWordPageFragment(word.capitalize())
+                val action =
+                    DictionaryFragmentDirections.actionNavigationDictionaryToWordPageFragment(word.toFirstCapitalLetters(word))
                 findNavController().navigate(action)
 
                 viewModel.returnFromWordPage()
@@ -56,14 +58,12 @@ class DictionaryFragment : Fragment() {
         return binding.root
     }
 
+    private fun capitalizeEachWord(word: String): String {
+        return word.substring(0, 1).uppercase(Locale.getDefault()) + word.substring(1)
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
 }
-
-//        binding.btnDictionaryToWordPage.setOnClickListener {
-//            val arg = "Banana"
-//            val action = DictionaryFragmentDirections.actionNavigationDictionaryToWordPageFragment(arg)
-//            findNavController().navigate(action)
-//        }

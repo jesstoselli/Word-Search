@@ -9,7 +9,7 @@
     tools:background="@color/zinc_1000"
     tools:context=".ui.fragments.DictionaryFragment">
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_standard"
@@ -27,12 +27,6 @@
             tools:itemCount="48"
             tools:listitem="@layout/word_item" />
 
-    </ScrollView>
-
-    <!--        <Button-->
-    <!--            android:id="@+id/btn_dictionaryToWordPage"-->
-    <!--            android:layout_width="wrap_content"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:text="Word Page" />-->
+    </androidx.core.widget.NestedScrollView>
 
 </androidx.appcompat.widget.LinearLayoutCompat>

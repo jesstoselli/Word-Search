@@ -14,8 +14,8 @@ import java.io.IOException
 
 class DictionaryViewModel(private val dictionaryProviderImpl: DictionaryProvider) : ViewModel() {
 
-    private val _apiStatus = MutableLiveData<ApiStatus>()
-    val apiStatus: LiveData<ApiStatus>
+    private val _apiStatus = MutableLiveData<ApiStatus<WordDTO>>()
+    val apiStatus: LiveData<ApiStatus<WordDTO>>
         get() = _apiStatus
 
     private val _favoriteWords = MutableLiveData<List<String>>()
@@ -30,9 +30,9 @@ class DictionaryViewModel(private val dictionaryProviderImpl: DictionaryProvider
     val wordsList: LiveData<List<String>>
         get() = _wordsList
 
-    private val _chosenWord = MutableLiveData<WordDTO>()
-    val chosenWord: LiveData<WordDTO>
-        get() = _chosenWord
+//    private val _chosenWord = MutableLiveData<WordDTO>()
+//    val chosenWord: LiveData<WordDTO>
+//        get() = _chosenWord
 
     private val _recyclerViewData = MutableLiveData<List<String>>()
     val recyclerViewData: LiveData<List<String>>
@@ -95,7 +95,6 @@ class DictionaryViewModel(private val dictionaryProviderImpl: DictionaryProvider
     )
 
     init {
-        Log.d(TAG, "Loaded properly")
         _wordsList.value = listOfWords
 //        getWordsFromDatabase()
 //        getFavoriteWordsFromDatabase()
@@ -130,20 +129,18 @@ class DictionaryViewModel(private val dictionaryProviderImpl: DictionaryProvider
         }
     }
 
-    private fun getWordDefinitionFromAPI(requestedWord: String) {
-        _apiStatus.value = ApiStatus.LOADING
+    fun getWordDefinitionFromAPI(requestedWord: String) {
+        _apiStatus.value = ApiStatus.Loading()
 
         viewModelScope.launch {
             try {
                 val retrievedWordDefinition = dictionaryProviderImpl.getWordDefinition(requestedWord)
-                _apiStatus.value = ApiStatus.DONE
-                _chosenWord.value = retrievedWordDefinition
+                _apiStatus.value = ApiStatus.Success(retrievedWordDefinition)
             } catch (e: Exception) {
                 val message =
                     if (e.localizedMessage.isNullOrEmpty()) "Something went wrong while loading data." else e.localizedMessage
                 Log.e(TAG, message)
-                _apiStatus.value = ApiStatus.ERROR
-                _chosenWord.value = WordDTO()
+                _apiStatus.value = ApiStatus.Error(message, null)
             }
         }
 
@@ -166,7 +163,8 @@ class DictionaryViewModel(private val dictionaryProviderImpl: DictionaryProvider
     }
 
     fun navigateToWordPage(word: String) {
-        getWordDefinitionFromAPI(word)
+        _apiStatus.value = ApiStatus.Loading()
+        Log.i(TAG, apiStatus.value.toString())
         _navigateToWordPage.value = word
     }
 
@@ -179,7 +177,7 @@ class DictionaryViewModel(private val dictionaryProviderImpl: DictionaryProvider
 
         viewModelScope.launch {
             val entry = dictionaryProviderImpl.getPreviouslySearchedWordEntry(word)
-            _chosenWord.value = entry
+            _apiStatus.value = ApiStatus.Success(entry)
             newEntry = entry
         }
 

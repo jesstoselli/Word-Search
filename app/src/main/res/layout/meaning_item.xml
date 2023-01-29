@@ -12,7 +12,6 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/inter"
         android:textColor="@color/white"
-        android:textSize="@dimen/font_regular"
         tools:text="Verb - “Hello!” or an equivalent greeting." />
 
     <TextView
@@ -22,24 +21,22 @@
         android:fontFamily="@font/inter_medium"
         android:text="@string/example"
         android:textColor="@color/zinc_500"
-        android:layout_marginTop="@dimen/margin_standard"
-        android:textSize="@dimen/font_regular"
+        android:layout_marginTop="@dimen/margin_half"
         tools:text="Example:" />
 
     <TextView
         android:id="@+id/textView_example"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_half"
+        android:layout_marginTop="@dimen/margin_tiny"
         android:fontFamily="@font/inter"
         android:textColor="@color/white"
-        android:textSize="@dimen/font_regular"
         tools:text="“Hello, Mark! How are you?”" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/zinc_500"
-        android:layout_marginVertical="@dimen/margin_standard" />
+        android:layout_marginVertical="@dimen/margin_half" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>
