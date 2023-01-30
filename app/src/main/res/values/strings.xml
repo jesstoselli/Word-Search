@@ -25,4 +25,6 @@
     <!--    Content Description     -->
     <string name="content_description_outline_heart_icon">Outline heart icon</string>
     <string name="content_description_alert_icon">Alert icon</string>
+    <string name="content_description_audio_player">Audio player</string>
+    <string name="play">Play</string>
 </resources>

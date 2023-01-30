@@ -5,9 +5,3 @@ sealed class ApiStatus<T>(val data: T? = null, val message: String? = null) {
     class Error<T>(message: String, data: T? = null) : ApiStatus<T>(data)
     class Loading<T>(data: T? = null) : ApiStatus<T>(data)
 }
-
-//enum class ApiStatus {
-//    LOADING,
-//    ERROR,
-//    DONE
-//}

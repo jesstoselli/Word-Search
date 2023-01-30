@@ -13,6 +13,12 @@ interface DictionaryEntriesDao {
     @Query("select * from words")
     fun getWordsList(): List<DictionaryEntryEntity>
 
+//    @Query("SELECT * FROM words WHERE word IN (SELECT word FROM words ORDER BY RANDOM() LIMIT :size) ")
+//    suspend fun getRandomWordItems(size: Int): List<DictionaryEntryEntity>
+
+    @Query("SELECT * FROM words LIMIT :limit OFFSET :offset")
+    fun getWordItems(limit: Int, offset: Int): List<DictionaryEntryEntity>
+
     @Query("select count(1) from words")
     fun getWordCount(): Int
 

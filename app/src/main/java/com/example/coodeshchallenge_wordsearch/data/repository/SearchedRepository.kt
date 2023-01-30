@@ -8,6 +8,8 @@ interface SearchedRepository {
 
     suspend fun getPreviouslySearchedWordEntry(word: String): List<WordEntity>
 
+    suspend fun getRandomPreviouslySearchedWordEntry(): List<WordEntity>
+
     suspend fun addWordToSearchHistory(wordEntity: WordEntity)
 
     suspend fun removeWordFromSearchHistory(word: String)

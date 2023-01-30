@@ -8,14 +8,13 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.coodeshchallenge_wordsearch.databinding.FragmentFavoritesBinding
-import com.example.coodeshchallenge_wordsearch.ui.DictionaryViewModel
 import com.example.coodeshchallenge_wordsearch.ui.fragments.adapters.WordsListAdapter
 import com.example.coodeshchallenge_wordsearch.utils.toFirstCapitalLetters
 import org.koin.android.ext.android.inject
 
 class FavoritesFragment : Fragment() {
 
-    private val viewModel: DictionaryViewModel by inject()
+    private val viewModel: HistoryViewModel by inject()
 
     private var _binding: FragmentFavoritesBinding? = null
 
@@ -47,13 +46,18 @@ class FavoritesFragment : Fragment() {
             }
         })
 
-        viewModel.wordsList.observe(viewLifecycleOwner, Observer { wordsList ->
+        viewModel.favoriteWords.observe(viewLifecycleOwner, Observer { wordsList ->
             adapter.submitList(wordsList)
             binding.recyclerViewFavorites.adapter = adapter
         })
 
         return binding.root
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+//        adapter.notifyDataSetChanged()
     }
 
     override fun onDestroyView() {

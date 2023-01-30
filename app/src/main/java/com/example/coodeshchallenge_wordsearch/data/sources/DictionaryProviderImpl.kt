@@ -1,5 +1,7 @@
 package com.example.coodeshchallenge_wordsearch.data.sources
 
+import android.util.Log
+import androidx.paging.PagingData
 import com.example.coodeshchallenge_wordsearch.data.repository.DictionaryEntriesRepository
 import com.example.coodeshchallenge_wordsearch.data.repository.SearchedRepository
 import com.example.coodeshchallenge_wordsearch.data.sources.local.entities.DictionaryEntryEntity
@@ -7,6 +9,8 @@ import com.example.coodeshchallenge_wordsearch.data.sources.remote.networkmodel.
 import com.example.coodeshchallenge_wordsearch.ui.model.WordDTO
 import com.example.coodeshchallenge_wordsearch.utils.mappers.WordDTOMapper
 import com.example.coodeshchallenge_wordsearch.utils.mappers.WordEntityMapper
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.flow.Flow
 
 class DictionaryProviderImpl(
     private val searchedRepositoryImpl: SearchedRepository,
@@ -21,6 +25,10 @@ class DictionaryProviderImpl(
         wordEntryEntities.map { wordEntryEntity -> wordsList.add(wordEntryEntity.word) }
 
         return wordsList
+    }
+
+    override suspend fun getPaginatedWordsList(scope: CoroutineScope): Flow<PagingData<DictionaryEntryEntity>> {
+        return dictionaryEntriesRepositoryImpl.getWordsListWithPagination(scope)
     }
 
     // Favorites
@@ -49,6 +57,16 @@ class DictionaryProviderImpl(
         return wordDTOMapper.toDomain(dataWordsList.first())
     }
 
+    override suspend fun getRandomPreviouslySearchedWordEntry(): WordDTO {
+        val dataWordsList = searchedRepositoryImpl.getRandomPreviouslySearchedWordEntry()
+
+        if (dataWordsList.isEmpty()) {
+            return WordDTO()
+        }
+
+        return wordDTOMapper.toDomain(dataWordsList.first())
+    }
+
     override suspend fun addWordToSearchHistory(word: Word) {
         searchedRepositoryImpl.addWordToSearchHistory(wordEntityMapper.toDomain(word))
     }
@@ -64,6 +82,7 @@ class DictionaryProviderImpl(
     // Remote Service
     override suspend fun getWordDefinition(word: String): WordDTO {
         val retrievedWord = dictionaryEntriesRepositoryImpl.getWordDefinition(word).first()
+        Log.i("DictionaryProvider", retrievedWord.word)
         addWordToSearchHistory(retrievedWord)
         val wordEntity = wordEntityMapper.toDomain(retrievedWord)
         return wordDTOMapper.toDomain(wordEntity)

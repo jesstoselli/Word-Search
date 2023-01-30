@@ -8,10 +8,12 @@ import com.example.coodeshchallenge_wordsearch.data.repository.SearchedRepositor
 import com.example.coodeshchallenge_wordsearch.data.sources.DictionaryProvider
 import com.example.coodeshchallenge_wordsearch.data.sources.DictionaryProviderImpl
 import com.example.coodeshchallenge_wordsearch.data.sources.local.DictionaryDatabase
+import com.example.coodeshchallenge_wordsearch.data.sources.local.DictionaryEntryDataSource
 import com.example.coodeshchallenge_wordsearch.data.sources.remote.DictionaryApiService
 import com.example.coodeshchallenge_wordsearch.data.sources.remote.ServiceHelpers.createOkHttpClient
 import com.example.coodeshchallenge_wordsearch.data.sources.remote.ServiceHelpers.createService
 import com.example.coodeshchallenge_wordsearch.ui.DictionaryViewModel
+import com.example.coodeshchallenge_wordsearch.ui.fragments.HistoryViewModel
 import com.example.coodeshchallenge_wordsearch.utils.mappers.MeaningDTOMapper
 import com.example.coodeshchallenge_wordsearch.utils.mappers.MeaningEntityMapper
 import com.example.coodeshchallenge_wordsearch.utils.mappers.WordDTOMapper
@@ -38,14 +40,17 @@ class DictionaryApp : Application() {
 
         val viewModelModule = module {
             viewModel { DictionaryViewModel(get()) }
+            viewModel { HistoryViewModel(get()) }
         }
 
         val dataModule = module {
             factory<DictionaryProvider> { DictionaryProviderImpl(get(), get(), get(), get()) }
 
-            single<DictionaryEntriesRepository> { DictionaryEntriesRepositoryImpl(get(), get()) }
+            single<DictionaryEntriesRepository> { DictionaryEntriesRepositoryImpl(get(), get(), get()) }
 
             single<SearchedRepository> { SearchedRepositoryImpl(get()) }
+
+            single { DictionaryEntryDataSource(get()) }
 
             single { DictionaryDatabase.getDatabase(this@DictionaryApp).searchedDao }
 

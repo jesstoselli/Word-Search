@@ -18,6 +18,12 @@ class SearchedRepositoryImpl(private val searchedDao: SearchedDao) : SearchedRep
         }
     }
 
+    override suspend fun getRandomPreviouslySearchedWordEntry(): List<WordEntity> {
+        wrapEspressoIdlingResource {
+            return searchedDao.getRandomPreviouslySearchedWordEntry()
+        }
+    }
+
     override suspend fun addWordToSearchHistory(wordEntity: WordEntity) {
         wrapEspressoIdlingResource {
             return searchedDao.addWordToSearchHistory(wordEntity)

@@ -6,13 +6,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.coodeshchallenge_wordsearch.databinding.FragmentDictionaryBinding
 import com.example.coodeshchallenge_wordsearch.ui.DictionaryViewModel
-import com.example.coodeshchallenge_wordsearch.ui.fragments.adapters.WordsListAdapter
+import com.example.coodeshchallenge_wordsearch.ui.fragments.adapters.PagedWordListAdapter
 import com.example.coodeshchallenge_wordsearch.utils.toFirstCapitalLetters
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
-import java.util.*
+
 
 class DictionaryFragment : Fragment() {
 
@@ -20,7 +25,8 @@ class DictionaryFragment : Fragment() {
 
     private var _binding: FragmentDictionaryBinding? = null
 
-    private lateinit var adapter: WordsListAdapter
+    private lateinit var pagingAdapter: PagedWordListAdapter
+    private lateinit var dictionaryRecyclerView: RecyclerView
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -34,8 +40,29 @@ class DictionaryFragment : Fragment() {
 
         _binding = FragmentDictionaryBinding.inflate(inflater, container, false)
 
-        adapter = WordsListAdapter(WordsListAdapter.WordClickedListener { word ->
-            viewModel.navigateToWordPage(word)
+        dictionaryRecyclerView = binding.recyclerViewDictionary
+
+        viewModel.populateDatabaseFromFile(requireContext(), "words.txt")
+
+        pagingAdapter = PagedWordListAdapter(PagedWordListAdapter.PagedWordClickedListener { dictionaryEntry ->
+            viewModel.navigateToWordPage(dictionaryEntry.word)
+        })
+
+        binding.recyclerViewDictionary.adapter = pagingAdapter
+        lifecycleScope.launch {
+            viewModel.wordsFlow.collectLatest { pagingData ->
+                pagingAdapter.submitData(pagingData)
+            }
+        }
+
+        binding.recyclerViewDictionary.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                val layoutManager = recyclerView.layoutManager as GridLayoutManager
+                val lastVisibleItem = layoutManager.findLastVisibleItemPosition()
+                if (lastVisibleItem + 1 == pagingAdapter.itemCount) {
+                    viewModel.getWordsFromDatabase()
+                }
+            }
         })
 
         viewModel.navigateToWordPage.observe(viewLifecycleOwner, Observer { word ->
@@ -48,18 +75,9 @@ class DictionaryFragment : Fragment() {
             }
         })
 
-        viewModel.wordsList.observe(viewLifecycleOwner, Observer { wordsList ->
-            adapter.submitList(wordsList)
-            binding.recyclerViewDictionary.adapter = adapter
-        })
 
-//        viewModel.populateDatabaseFromFile(requireContext(), "words.txt")
 
         return binding.root
-    }
-
-    private fun capitalizeEachWord(word: String): String {
-        return word.substring(0, 1).uppercase(Locale.getDefault()) + word.substring(1)
     }
 
     override fun onDestroyView() {
