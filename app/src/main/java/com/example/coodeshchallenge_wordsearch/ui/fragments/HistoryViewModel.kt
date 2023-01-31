@@ -1,6 +1,7 @@
 package com.example.coodeshchallenge_wordsearch.ui.fragments
 
 import android.util.Log
+import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -29,7 +30,6 @@ class HistoryViewModel(private val dictionaryProviderImpl: DictionaryProvider) :
         get() = _navigateToWordPage
 
     init {
-        Log.d(TAG, "Loaded properly")
         getFavoriteWordsFromDatabase()
         getPreviouslySearchedWords()
     }
@@ -59,7 +59,8 @@ class HistoryViewModel(private val dictionaryProviderImpl: DictionaryProvider) :
         }
     }
 
-    private fun getFavoriteWordsFromDatabase() {
+    // Kept public for unit testing
+    fun getFavoriteWordsFromDatabase() {
         viewModelScope.launch {
             _favoriteWords.value = dictionaryProviderImpl.getFavoriteWords().map { it.word }
         }
