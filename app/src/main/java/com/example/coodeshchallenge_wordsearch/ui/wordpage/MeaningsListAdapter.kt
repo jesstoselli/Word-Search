@@ -1,4 +1,4 @@
-package com.example.coodeshchallenge_wordsearch.ui.fragments.adapters
+package com.example.coodeshchallenge_wordsearch.ui.wordpage
 
 import android.view.LayoutInflater
 import android.view.View

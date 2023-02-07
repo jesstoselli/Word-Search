@@ -1,4 +1,4 @@
-package com.example.coodeshchallenge_wordsearch.ui.fragments
+package com.example.coodeshchallenge_wordsearch.ui.dictionary
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,13 +11,11 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.coodeshchallenge_wordsearch.databinding.FragmentDictionaryBinding
-import com.example.coodeshchallenge_wordsearch.ui.DictionaryViewModel
-import com.example.coodeshchallenge_wordsearch.ui.fragments.adapters.PagedWordListAdapter
+import com.example.coodeshchallenge_wordsearch.ui.adapters.PagedWordListAdapter
 import com.example.coodeshchallenge_wordsearch.utils.toFirstCapitalLetters
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
-
 
 class DictionaryFragment : Fragment() {
 

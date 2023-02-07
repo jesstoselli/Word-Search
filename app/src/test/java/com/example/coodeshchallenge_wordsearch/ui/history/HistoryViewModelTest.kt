@@ -1,4 +1,4 @@
-package com.example.coodeshchallenge_wordsearch.ui.fragments
+package com.example.coodeshchallenge_wordsearch.ui.history
 
 import com.example.coodeshchallenge_wordsearch.MainDispatcherRule
 import com.example.coodeshchallenge_wordsearch.data.sources.DictionaryProvider

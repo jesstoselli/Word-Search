@@ -1,5 +1,6 @@
 package com.example.coodeshchallenge_wordsearch.data.repository
 
+import androidx.lifecycle.LiveData
 import androidx.paging.PagingData
 import com.example.coodeshchallenge_wordsearch.data.sources.local.entities.DictionaryEntryEntity
 import com.example.coodeshchallenge_wordsearch.data.sources.remote.networkmodel.Word
@@ -8,6 +9,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface DictionaryEntriesRepository {
 
+    //    val wordDefinitionFromAPI: LiveData<List<Word>>
     suspend fun getWordDefinition(word: String): List<Word>
 
     suspend fun getRandomWordDefinition(): List<Word>

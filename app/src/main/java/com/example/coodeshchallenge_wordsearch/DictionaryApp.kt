@@ -9,18 +9,15 @@ import com.example.coodeshchallenge_wordsearch.data.sources.DictionaryProvider
 import com.example.coodeshchallenge_wordsearch.data.sources.DictionaryProviderImpl
 import com.example.coodeshchallenge_wordsearch.data.sources.local.DictionaryDatabase
 import com.example.coodeshchallenge_wordsearch.data.sources.local.DictionaryEntryDataSource
-import com.example.coodeshchallenge_wordsearch.data.sources.remote.DictionaryApiService
-import com.example.coodeshchallenge_wordsearch.data.sources.remote.ServiceHelpers.createOkHttpClient
-import com.example.coodeshchallenge_wordsearch.data.sources.remote.ServiceHelpers.createService
 import com.example.coodeshchallenge_wordsearch.ui.BaseViewModel
-import com.example.coodeshchallenge_wordsearch.ui.DictionaryViewModel
-import com.example.coodeshchallenge_wordsearch.ui.fragments.HistoryViewModel
+import com.example.coodeshchallenge_wordsearch.ui.dictionary.DictionaryViewModel
+import com.example.coodeshchallenge_wordsearch.ui.favorites.FavoritesViewModel
+import com.example.coodeshchallenge_wordsearch.ui.history.HistoryViewModel
+import com.example.coodeshchallenge_wordsearch.ui.wordpage.WordPageViewModel
 import com.example.coodeshchallenge_wordsearch.utils.mappers.MeaningDTOMapper
 import com.example.coodeshchallenge_wordsearch.utils.mappers.MeaningEntityMapper
 import com.example.coodeshchallenge_wordsearch.utils.mappers.WordDTOMapper
 import com.example.coodeshchallenge_wordsearch.utils.mappers.WordEntityMapper
-import com.squareup.moshi.Moshi
-import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -43,12 +40,14 @@ class DictionaryApp : Application() {
             single { BaseViewModel() }
             viewModel { DictionaryViewModel(get()) }
             viewModel { HistoryViewModel(get()) }
+            viewModel { FavoritesViewModel(get()) }
+            viewModel { WordPageViewModel(get()) }
         }
 
         val dataModule = module {
             factory<DictionaryProvider> { DictionaryProviderImpl(get(), get(), get(), get()) }
 
-            single<DictionaryEntriesRepository> { DictionaryEntriesRepositoryImpl(get(), get(), get()) }
+            single<DictionaryEntriesRepository> { DictionaryEntriesRepositoryImpl(get(), get()) }
 
             single<SearchedRepository> { SearchedRepositoryImpl(get()) }
 
@@ -59,19 +58,6 @@ class DictionaryApp : Application() {
             single { DictionaryDatabase.getDatabase(this@DictionaryApp).dictionaryEntriesDao }
         }
 
-        val networkModule = module {
-
-            // Creates a logging interceptor using OkHttp3
-            single { createOkHttpClient(OK_HTTP) }
-
-            // Instantiates a Moshi factory
-            single { Moshi.Builder().add(KotlinJsonAdapterFactory()).build() }
-
-            // Creates a service using Retrofit
-            single { createService<DictionaryApiService>(get(), get(), BASE_URL) }
-
-        }
-
         startKoin {
             androidLogger()
             androidContext(this@DictionaryApp)
@@ -79,15 +65,9 @@ class DictionaryApp : Application() {
                 listOf(
                     mappersModule,
                     viewModelModule,
-                    dataModule,
-                    networkModule
+                    dataModule
                 )
             )
         }
-    }
-
-    companion object {
-        private const val BASE_URL = "https://api.dictionaryapi.dev/api/v2/entries/en/"
-        private const val OK_HTTP = "Ok Http"
     }
 }

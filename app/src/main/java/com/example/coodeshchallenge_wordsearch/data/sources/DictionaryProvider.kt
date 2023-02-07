@@ -1,5 +1,6 @@
 package com.example.coodeshchallenge_wordsearch.data.sources
 
+import androidx.lifecycle.LiveData
 import androidx.paging.PagingData
 import com.example.coodeshchallenge_wordsearch.data.sources.local.entities.DictionaryEntryEntity
 import com.example.coodeshchallenge_wordsearch.data.sources.remote.networkmodel.Word
@@ -21,9 +22,9 @@ interface DictionaryProvider {
 
     suspend fun getPreviouslySearchedWords(): List<WordDTO>
 
-    suspend fun getPreviouslySearchedWordEntry(word: String): WordDTO?
+    suspend fun getPreviouslySearchedWordEntry(word: String): WordDTO
 
-    suspend fun getRandomPreviouslySearchedWordEntry(): WordDTO?
+    suspend fun getRandomPreviouslySearchedWordEntry(): WordDTO
 
     suspend fun addWordToSearchHistory(word: Word)
 

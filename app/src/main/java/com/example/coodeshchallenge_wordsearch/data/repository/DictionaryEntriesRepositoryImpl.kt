@@ -1,20 +1,24 @@
 package com.example.coodeshchallenge_wordsearch.data.repository
 
 import android.os.RemoteException
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.example.coodeshchallenge_wordsearch.data.sources.local.DictionaryEntryDataSource
 import com.example.coodeshchallenge_wordsearch.data.sources.local.dao.DictionaryEntriesDao
 import com.example.coodeshchallenge_wordsearch.data.sources.local.entities.DictionaryEntryEntity
+import com.example.coodeshchallenge_wordsearch.data.sources.remote.DictionaryApi.dictionaryService
 import com.example.coodeshchallenge_wordsearch.data.sources.remote.DictionaryApiService
 import com.example.coodeshchallenge_wordsearch.data.sources.remote.networkmodel.Word
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.withContext
 import retrofit2.HttpException
 
 class DictionaryEntriesRepositoryImpl(
-    private val dictionaryService: DictionaryApiService,
     private val dictionaryEntriesDao: DictionaryEntriesDao,
     private val dictionaryEntryDataSource: DictionaryEntryDataSource
 ) : DictionaryEntriesRepository {

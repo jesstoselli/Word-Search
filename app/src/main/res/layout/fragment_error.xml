@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:padding="@dimen/margin_standard"
     tools:background="@color/zinc_1000"
-    tools:context=".ui.fragments.ErrorFragment">
+    tools:context=".ui.error.ErrorFragment">
 
     <ImageView
         android:id="@+id/imageView_alertCircle"

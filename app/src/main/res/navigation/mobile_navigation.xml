@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/navigation_dictionary"
-        android:name="com.example.coodeshchallenge_wordsearch.ui.fragments.DictionaryFragment"
+        android:name="com.example.coodeshchallenge_wordsearch.ui.dictionary.DictionaryFragment"
         android:label="@string/title_dictionary"
         tools:layout="@layout/fragment_dictionary" >
         <action
@@ -26,15 +26,12 @@
             <argument
                 android:name="page"
                 android:defaultValue="Dictionary" />
-            <!--            <argument-->
-            <!--                android:name="errorMessage"-->
-            <!--                app:argType="string" />-->
         </action>
     </fragment>
 
     <fragment
         android:id="@+id/navigation_history"
-        android:name="com.example.coodeshchallenge_wordsearch.ui.fragments.HistoryFragment"
+        android:name="com.example.coodeshchallenge_wordsearch.ui.history.HistoryFragment"
         android:label="@string/title_history"
         tools:layout="@layout/fragment_history" >
         <action
@@ -46,9 +43,6 @@
             <argument
                 android:name="origin"
                 android:defaultValue="History" />
-            <!--            <argument-->
-            <!--                android:name="errorMessage"-->
-            <!--                app:argType="string" />-->
         </action>
         <action
             android:id="@+id/action_navigation_history_to_errorFragment"
@@ -61,7 +55,7 @@
 
     <fragment
         android:id="@+id/navigation_favorites"
-        android:name="com.example.coodeshchallenge_wordsearch.ui.fragments.FavoritesFragment"
+        android:name="com.example.coodeshchallenge_wordsearch.ui.favorites.FavoritesFragment"
         android:label="@string/title_favorites"
         tools:layout="@layout/fragment_favorites" >
         <action
@@ -73,9 +67,6 @@
             <argument
                 android:name="origin"
                 android:defaultValue="Favorites" />
-            <!--            <argument-->
-            <!--                android:name="errorMessage"-->
-            <!--                app:argType="string" />-->
         </action>
         <action
             android:id="@+id/action_navigation_favorites_to_errorFragment"
@@ -88,7 +79,7 @@
 
     <fragment
         android:id="@+id/navigation_word_page"
-        android:name="com.example.coodeshchallenge_wordsearch.ui.fragments.WordPageFragment"
+        android:name="com.example.coodeshchallenge_wordsearch.ui.wordpage.WordPageFragment"
         android:label="{title}"
         tools:layout="@layout/fragment_word_page">
         <argument
@@ -103,9 +94,6 @@
             <argument
                 android:name="page"
                 android:defaultValue="Dictionary" />
-            <!--            <argument-->
-            <!--                android:name="errorMessage"-->
-            <!--                app:argType="string" />-->
         </action>
         <action
             android:id="@+id/action_wordPageFragment_to_navigation_dictionary"
@@ -120,15 +108,12 @@
 
     <fragment
         android:id="@+id/navigation_error"
-        android:name="com.example.coodeshchallenge_wordsearch.ui.fragments.ErrorFragment"
+        android:name="com.example.coodeshchallenge_wordsearch.ui.error.ErrorFragment"
         android:label="@string/title_error"
         tools:layout="@layout/fragment_error">
         <argument
             android:name="page"
             app:argType="string" />
-        <!--        <argument-->
-        <!--            android:name="errorMessage"-->
-        <!--            app:argType="string" />-->
         <action
             android:id="@+id/action_navigation_error_to_navigation_dictionary"
             app:destination="@id/navigation_dictionary" />

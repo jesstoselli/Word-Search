@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:gravity="center"
     tools:background="@color/zinc_1000"
-    tools:context=".ui.fragments.WordPageFragment">
+    tools:context=".ui.wordpage.WordPageFragment">
 
     <com.google.android.material.progressindicator.CircularProgressIndicator
         android:id="@+id/progressIndicator"

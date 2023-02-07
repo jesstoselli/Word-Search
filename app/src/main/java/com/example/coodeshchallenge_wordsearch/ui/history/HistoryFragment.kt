@@ -1,4 +1,4 @@
-package com.example.coodeshchallenge_wordsearch.ui.fragments
+package com.example.coodeshchallenge_wordsearch.ui.history
 
 import android.os.Bundle
 import android.util.Log
@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.coodeshchallenge_wordsearch.databinding.FragmentHistoryBinding
-import com.example.coodeshchallenge_wordsearch.ui.fragments.adapters.WordsListAdapter
+import com.example.coodeshchallenge_wordsearch.ui.adapters.WordsListAdapter
 import com.example.coodeshchallenge_wordsearch.utils.toFirstCapitalLetters
 import org.koin.android.ext.android.inject
 
@@ -40,7 +40,6 @@ class HistoryFragment : Fragment() {
 
         viewModel.navigateToWordPage.observe(viewLifecycleOwner, Observer { word ->
             if (word != null) {
-                viewModel.getPreviouslySearchedWordEntry(word)
 
                 Log.i("HistoryFragment", "inside navigateToWordPage observable. Word is $word")
                 val action =
