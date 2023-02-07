@@ -75,8 +75,6 @@ class DictionaryFragment : Fragment() {
             }
         })
 
-
-
         return binding.root
     }
 

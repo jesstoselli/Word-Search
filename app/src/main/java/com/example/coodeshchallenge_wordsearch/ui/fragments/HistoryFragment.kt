@@ -40,6 +40,8 @@ class HistoryFragment : Fragment() {
 
         viewModel.navigateToWordPage.observe(viewLifecycleOwner, Observer { word ->
             if (word != null) {
+                viewModel.getPreviouslySearchedWordEntry(word)
+
                 Log.i("HistoryFragment", "inside navigateToWordPage observable. Word is $word")
                 val action =
                     HistoryFragmentDirections.actionNavigationHistoryToWordPageFragment(word.toFirstCapitalLetters(word))

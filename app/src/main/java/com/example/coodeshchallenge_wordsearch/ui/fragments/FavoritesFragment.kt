@@ -38,6 +38,8 @@ class FavoritesFragment : Fragment() {
 
         viewModel.navigateToWordPage.observe(viewLifecycleOwner, Observer { word ->
             if (word != null) {
+                viewModel.getPreviouslySearchedWordEntry(word)
+
                 val action =
                     FavoritesFragmentDirections.actionNavigationFavoritesToWordPageFragment(word.toFirstCapitalLetters(word))
                 findNavController().navigate(action)

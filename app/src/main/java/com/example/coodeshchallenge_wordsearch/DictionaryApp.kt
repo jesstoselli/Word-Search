@@ -12,6 +12,7 @@ import com.example.coodeshchallenge_wordsearch.data.sources.local.DictionaryEntr
 import com.example.coodeshchallenge_wordsearch.data.sources.remote.DictionaryApiService
 import com.example.coodeshchallenge_wordsearch.data.sources.remote.ServiceHelpers.createOkHttpClient
 import com.example.coodeshchallenge_wordsearch.data.sources.remote.ServiceHelpers.createService
+import com.example.coodeshchallenge_wordsearch.ui.BaseViewModel
 import com.example.coodeshchallenge_wordsearch.ui.DictionaryViewModel
 import com.example.coodeshchallenge_wordsearch.ui.fragments.HistoryViewModel
 import com.example.coodeshchallenge_wordsearch.utils.mappers.MeaningDTOMapper
@@ -39,6 +40,7 @@ class DictionaryApp : Application() {
         }
 
         val viewModelModule = module {
+            single { BaseViewModel() }
             viewModel { DictionaryViewModel(get()) }
             viewModel { HistoryViewModel(get()) }
         }

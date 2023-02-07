@@ -5,6 +5,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.coodeshchallenge_wordsearch.data.sources.local.entities.DictionaryEntryEntity
+import com.example.coodeshchallenge_wordsearch.data.sources.local.entities.WordEntity
 
 @Dao
 interface DictionaryEntriesDao {
@@ -18,6 +19,9 @@ interface DictionaryEntriesDao {
 
     @Query("SELECT * FROM words LIMIT :limit OFFSET :offset")
     fun getWordItems(limit: Int, offset: Int): List<DictionaryEntryEntity>
+
+    @Query("SELECT * FROM searched ORDER BY RANDOM() LIMIT 1")
+    fun getRandomWordEntry(): List<DictionaryEntryEntity>
 
     @Query("select count(1) from words")
     fun getWordCount(): Int

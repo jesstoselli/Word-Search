@@ -28,7 +28,7 @@
         android:layout_marginTop="@dimen/margin_large"
         android:fontFamily="@font/inter_medium"
         android:lineSpacingExtra="20sp"
-        android:text="@string/error_message"
+        android:text="@string/error_message_default"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="@dimen/font_medium"

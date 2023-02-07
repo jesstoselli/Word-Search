@@ -28,14 +28,18 @@ class DictionaryEntriesRepositoryImpl(
         }
     }
 
+    override suspend fun getRandomWordDefinition(): List<Word> {
+        val entry = dictionaryEntriesDao.getRandomWordEntry().first()
+
+        return getWordDefinition(entry.word)
+    }
+
     override suspend fun getWordsList(): List<DictionaryEntryEntity> {
         return dictionaryEntriesDao.getWordsList()
     }
 
     override suspend fun getWordsListWithPagination(scope: CoroutineScope): Flow<PagingData<DictionaryEntryEntity>> {
         return Pager(PagingConfig(pageSize = 60)) { dictionaryEntryDataSource }.flow
-
-        //.cachedIn(scope)
     }
 
     override suspend fun populateDatabaseFromFile(wordsList: List<DictionaryEntryEntity>) {

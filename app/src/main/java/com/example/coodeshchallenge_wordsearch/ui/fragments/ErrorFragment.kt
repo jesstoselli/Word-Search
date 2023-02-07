@@ -30,7 +30,6 @@ class ErrorFragment : Fragment() {
             findNavController().navigate(action)
         }
 
-
         return binding.root
     }
 

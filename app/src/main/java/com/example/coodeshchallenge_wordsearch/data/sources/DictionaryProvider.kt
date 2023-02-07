@@ -13,15 +13,17 @@ interface DictionaryProvider {
 
     suspend fun getPaginatedWordsList(scope: CoroutineScope): Flow<PagingData<DictionaryEntryEntity>>
 
+    suspend fun getRandomWordEntry(): WordDTO
+
     suspend fun getFavoriteWords(): List<WordDTO>
 
     suspend fun toggleFavoriteWord(word: String, isFavorite: Boolean)
 
     suspend fun getPreviouslySearchedWords(): List<WordDTO>
 
-    suspend fun getPreviouslySearchedWordEntry(word: String): WordDTO
+    suspend fun getPreviouslySearchedWordEntry(word: String): WordDTO?
 
-    suspend fun getRandomPreviouslySearchedWordEntry(): WordDTO
+    suspend fun getRandomPreviouslySearchedWordEntry(): WordDTO?
 
     suspend fun addWordToSearchHistory(word: Word)
 

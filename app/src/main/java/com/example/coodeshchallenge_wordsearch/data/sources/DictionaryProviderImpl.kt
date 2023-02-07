@@ -31,6 +31,14 @@ class DictionaryProviderImpl(
         return dictionaryEntriesRepositoryImpl.getWordsListWithPagination(scope)
     }
 
+    override suspend fun getRandomWordEntry(): WordDTO {
+        val word = dictionaryEntriesRepositoryImpl.getRandomWordDefinition().first()
+
+        val wordEntity = wordEntityMapper.toDomain(word)
+
+        return wordDTOMapper.toDomain(wordEntity)
+    }
+
     // Favorites
     override suspend fun getFavoriteWords(): List<WordDTO> {
         val dataWordsList = searchedRepositoryImpl.getFavoriteWords()
@@ -47,22 +55,18 @@ class DictionaryProviderImpl(
         return dataWordsList.map { wordDTOMapper.toDomain(it) }
     }
 
-    override suspend fun getPreviouslySearchedWordEntry(word: String): WordDTO {
+    override suspend fun getPreviouslySearchedWordEntry(word: String): WordDTO? {
         val dataWordsList = searchedRepositoryImpl.getPreviouslySearchedWordEntry(word)
 
-        if (dataWordsList.isEmpty()) {
-            return WordDTO()
-        }
+        if (dataWordsList.isEmpty()) return WordDTO()
 
         return wordDTOMapper.toDomain(dataWordsList.first())
     }
 
-    override suspend fun getRandomPreviouslySearchedWordEntry(): WordDTO {
+    override suspend fun getRandomPreviouslySearchedWordEntry(): WordDTO? {
         val dataWordsList = searchedRepositoryImpl.getRandomPreviouslySearchedWordEntry()
 
-        if (dataWordsList.isEmpty()) {
-            return WordDTO()
-        }
+        if (dataWordsList.isEmpty()) return WordDTO()
 
         return wordDTOMapper.toDomain(dataWordsList.first())
     }
@@ -82,9 +86,13 @@ class DictionaryProviderImpl(
     // Remote Service
     override suspend fun getWordDefinition(word: String): WordDTO {
         val retrievedWord = dictionaryEntriesRepositoryImpl.getWordDefinition(word).first()
+
         Log.i("DictionaryProvider", retrievedWord.word)
+
         addWordToSearchHistory(retrievedWord)
+
         val wordEntity = wordEntityMapper.toDomain(retrievedWord)
+
         return wordDTOMapper.toDomain(wordEntity)
     }
 

@@ -26,6 +26,9 @@
             <argument
                 android:name="page"
                 android:defaultValue="Dictionary" />
+            <!--            <argument-->
+            <!--                android:name="errorMessage"-->
+            <!--                app:argType="string" />-->
         </action>
     </fragment>
 
@@ -43,6 +46,9 @@
             <argument
                 android:name="origin"
                 android:defaultValue="History" />
+            <!--            <argument-->
+            <!--                android:name="errorMessage"-->
+            <!--                app:argType="string" />-->
         </action>
         <action
             android:id="@+id/action_navigation_history_to_errorFragment"
@@ -67,6 +73,9 @@
             <argument
                 android:name="origin"
                 android:defaultValue="Favorites" />
+            <!--            <argument-->
+            <!--                android:name="errorMessage"-->
+            <!--                app:argType="string" />-->
         </action>
         <action
             android:id="@+id/action_navigation_favorites_to_errorFragment"
@@ -94,6 +103,9 @@
             <argument
                 android:name="page"
                 android:defaultValue="Dictionary" />
+            <!--            <argument-->
+            <!--                android:name="errorMessage"-->
+            <!--                app:argType="string" />-->
         </action>
         <action
             android:id="@+id/action_wordPageFragment_to_navigation_dictionary"
@@ -114,6 +126,9 @@
         <argument
             android:name="page"
             app:argType="string" />
+        <!--        <argument-->
+        <!--            android:name="errorMessage"-->
+        <!--            app:argType="string" />-->
         <action
             android:id="@+id/action_navigation_error_to_navigation_dictionary"
             app:destination="@id/navigation_dictionary" />

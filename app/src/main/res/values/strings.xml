@@ -9,7 +9,9 @@
     <string name="title_word_page">Word Page</string>
 
     <!--    Error Page     -->
-    <string name="error_message">Sorry, something went wrong.</string>
+    <string name="error_message_default">Sorry, something went wrong.</string>
+    <string name="error_message_no_word_definition">Sorry, the definition you were looking for isn\'t currently available. You
+        can try the search again at later time or head to the web instead.</string>
     <string name="btn_return">Return</string>
 
     <!--    Word Page     -->

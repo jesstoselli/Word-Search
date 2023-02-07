@@ -10,6 +10,8 @@ interface DictionaryEntriesRepository {
 
     suspend fun getWordDefinition(word: String): List<Word>
 
+    suspend fun getRandomWordDefinition(): List<Word>
+
     suspend fun getWordsList(): List<DictionaryEntryEntity>
 
     suspend fun getWordsListWithPagination(scope: CoroutineScope): Flow<PagingData<DictionaryEntryEntity>>
