@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -33,12 +34,41 @@ class WordPageFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        (requireActivity() as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(false)
+
+//        val onBackPressedCallback = object : OnBackPressedCallback(true) {
+//            override fun handleOnBackPressed() {
+//                val action = when (args.origin) {
+//                    "Dictionary" -> findNavController().popBackStack(R.id.navigation_dictionary, false)
+//                    "History" -> findNavController().popBackStack(R.id.navigation_history, false)
+//                    "Favorites" -> findNavController().popBackStack(R.id.navigation_favorites, false)
+//                    else -> findNavController().popBackStack(R.id.navigation_dictionary, false)
+//                }
+//            }
+//        }
+//
+//        requireActivity().onBackPressedDispatcher.addCallback(this, onBackPressedCallback)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
 
         _binding = FragmentWordPageBinding.inflate(layoutInflater)
+
+//        requireActivity().onBackPressedDispatcher.addCallback(this, onBackPressedCallback)
+//
+//            fun onBackPressedCallback
+//            () -> {
+//            navController.popBackStack(R.id.homeFragment, false);
+//        });
+//        return true;
+//    });
+
 
         val originFragment = args.origin
 
@@ -49,20 +79,24 @@ class WordPageFragment : Fragment() {
             val wordDto = viewModel.selectedWord.value
 
             when (apiStatus) {
-                ApiStatus.LOADING -> Log.i("WordPageFragment", "ApiStatus is Loading")
+                ApiStatus.LOADING -> {
+                    Log.i("WordPageFragment", "ApiStatus is Loading")
+
+                    binding.progressIndicator.visibility = View.VISIBLE
+                    binding.scrollViewWordPage.visibility = View.GONE
+                }
 
                 ApiStatus.SUCCESS -> {
                     if (wordDto != null) {
+                        activity?.title = wordDto.word
                         viewModel.setFavorite(wordDto.favorite)
                         setUpUI(wordDto)
                     }
                 }
 
                 ApiStatus.ERROR -> {
-                    val message = R.string.error_message_no_word_definition.toString()
-
                     val action =
-                        WordPageFragmentDirections.actionWordPageFragmentToErrorFragment(message)
+                        WordPageFragmentDirections.actionWordPageFragmentToErrorFragment(viewModel.apiErrorMessage)
                     findNavController().navigate(action)
                 }
 
@@ -88,6 +122,7 @@ class WordPageFragment : Fragment() {
             }
 
             imageViewToggleFavoriteWord.setOnClickListener {
+//                toggleFavorite(viewModel.selectedWord)
                 viewModel.selectedWord.value?.let { word -> toggleFavorite(word) }
             }
         }

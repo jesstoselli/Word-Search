@@ -58,7 +58,8 @@ class FavoritesFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-//        adapter.notifyDataSetChanged()
+
+        viewModel.getFavoriteWordsFromDatabase()
     }
 
     override fun onDestroyView() {

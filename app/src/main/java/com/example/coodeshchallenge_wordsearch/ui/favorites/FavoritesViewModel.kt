@@ -18,9 +18,10 @@ class FavoritesViewModel(private val dictionaryProviderImpl: DictionaryProvider)
     }
 
 
-    private fun getFavoriteWordsFromDatabase() {
+    fun getFavoriteWordsFromDatabase() {
         viewModelScope.launch {
             _favoriteWords.value = dictionaryProviderImpl.getFavoriteWords().map { it.word }
         }
     }
+
 }

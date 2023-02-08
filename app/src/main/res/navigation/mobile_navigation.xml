@@ -80,8 +80,8 @@
     <fragment
         android:id="@+id/navigation_word_page"
         android:name="com.example.coodeshchallenge_wordsearch.ui.wordpage.WordPageFragment"
-        android:label="{title}"
         tools:layout="@layout/fragment_word_page">
+<!--        android:label="{title}"-->
         <argument
             android:name="title"
             app:argType="string" />
@@ -94,6 +94,7 @@
             <argument
                 android:name="page"
                 android:defaultValue="Dictionary" />
+            <argument android:name="errorMessage" />
         </action>
         <action
             android:id="@+id/action_wordPageFragment_to_navigation_dictionary"
@@ -113,6 +114,9 @@
         tools:layout="@layout/fragment_error">
         <argument
             android:name="page"
+            app:argType="string" />
+        <argument
+            android:name="errorMessage"
             app:argType="string" />
         <action
             android:id="@+id/action_navigation_error_to_navigation_dictionary"

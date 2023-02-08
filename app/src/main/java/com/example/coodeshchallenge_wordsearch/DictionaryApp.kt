@@ -15,9 +15,13 @@ import com.example.coodeshchallenge_wordsearch.ui.favorites.FavoritesViewModel
 import com.example.coodeshchallenge_wordsearch.ui.history.HistoryViewModel
 import com.example.coodeshchallenge_wordsearch.ui.wordpage.WordPageViewModel
 import com.example.coodeshchallenge_wordsearch.utils.mappers.MeaningDTOMapper
+import com.example.coodeshchallenge_wordsearch.utils.mappers.MeaningDTOToMeaningEntityMapper
 import com.example.coodeshchallenge_wordsearch.utils.mappers.MeaningEntityMapper
+import com.example.coodeshchallenge_wordsearch.utils.mappers.MeaningToMeaningDTOMapper
 import com.example.coodeshchallenge_wordsearch.utils.mappers.WordDTOMapper
+import com.example.coodeshchallenge_wordsearch.utils.mappers.WordDTOToWordEntityMapper
 import com.example.coodeshchallenge_wordsearch.utils.mappers.WordEntityMapper
+import com.example.coodeshchallenge_wordsearch.utils.mappers.WordToWordDTOMapper
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -32,8 +36,12 @@ class DictionaryApp : Application() {
         val mappersModule = module {
             factory { WordEntityMapper(get()) }
             factory { WordDTOMapper(get()) }
+            factory { WordToWordDTOMapper(get()) }
+            factory { WordDTOToWordEntityMapper(get()) }
             factory { MeaningEntityMapper() }
             factory { MeaningDTOMapper() }
+            factory { MeaningToMeaningDTOMapper() }
+            factory { MeaningDTOToMeaningEntityMapper() }
         }
 
         val viewModelModule = module {
@@ -41,11 +49,11 @@ class DictionaryApp : Application() {
             viewModel { DictionaryViewModel(get()) }
             viewModel { HistoryViewModel(get()) }
             viewModel { FavoritesViewModel(get()) }
-            viewModel { WordPageViewModel(get()) }
+            viewModel { WordPageViewModel(get(), get()) }
         }
 
         val dataModule = module {
-            factory<DictionaryProvider> { DictionaryProviderImpl(get(), get(), get(), get()) }
+            factory<DictionaryProvider> { DictionaryProviderImpl(get(), get(), get(), get(), get()) }
 
             single<DictionaryEntriesRepository> { DictionaryEntriesRepositoryImpl(get(), get()) }
 
