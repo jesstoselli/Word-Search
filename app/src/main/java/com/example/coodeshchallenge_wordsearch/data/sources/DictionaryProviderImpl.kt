@@ -7,14 +7,12 @@ import com.example.coodeshchallenge_wordsearch.data.sources.local.entities.Dicti
 import com.example.coodeshchallenge_wordsearch.ui.model.WordDTO
 import com.example.coodeshchallenge_wordsearch.utils.mappers.WordDTOMapper
 import com.example.coodeshchallenge_wordsearch.utils.mappers.WordDTOToWordEntityMapper
-import com.example.coodeshchallenge_wordsearch.utils.mappers.WordEntityMapper
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 
 class DictionaryProviderImpl(
     private val searchedRepositoryImpl: SearchedRepository,
     private val dictionaryEntriesRepositoryImpl: DictionaryEntriesRepository,
-    private val wordEntityMapper: WordEntityMapper,
     private val wordDTOMapper: WordDTOMapper,
     private val wordDTOToWordEntityMapper: WordDTOToWordEntityMapper
 ) : DictionaryProvider {
@@ -59,15 +57,6 @@ class DictionaryProviderImpl(
         return dictionaryEntriesRepositoryImpl.getRandomDictionaryEntry()
     }
 
-//    override suspend fun getRandomWordEntry(): WordDTO {
-////        val word = dictionaryEntriesRepositoryImpl.getRandomWordDefinition().first()
-//        val word = dictionaryEntriesRepositoryImpl.wordDefinitionFromAPI.value!!.first()
-//
-//        val wordEntity = wordEntityMapper.toDomain(word)
-//
-//        return wordDTOMapper.toDomain(wordEntity)
-//    }
-
     override suspend fun getRandomPreviouslySearchedWordEntry(): WordDTO {
         val dataWordsList = searchedRepositoryImpl.getRandomPreviouslySearchedWordEntry()
 
@@ -89,20 +78,6 @@ class DictionaryProviderImpl(
     override suspend fun clearSearchHistory() {
         searchedRepositoryImpl.clearSearchHistory()
     }
-
-    // Remote Service
-//    override suspend fun getWordDefinition(word: String): WordDTO {
-//        val retrievedWord = dictionaryEntriesRepositoryImpl.getWordDefinition(word).first()
-//        val retrievedWord = dictionaryEntriesRepositoryImpl.wordDefinitionFromAPI.value
-//
-//        Log.i("DictionaryProvider", retrievedWord.word)
-//
-//        addWordToSearchHistory(retrievedWord)
-//
-//        val wordEntity = wordEntityMapper.toDomain(retrievedWord)
-//
-//        return wordDTOMapper.toDomain(wordEntity)
-//    }
 
     // Setting up database
     override suspend fun populateDatabaseFromFile(listOfWords: List<String>) {

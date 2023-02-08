@@ -2,7 +2,6 @@ package com.example.coodeshchallenge_wordsearch.data.sources
 
 import androidx.paging.PagingData
 import com.example.coodeshchallenge_wordsearch.data.sources.local.entities.DictionaryEntryEntity
-import com.example.coodeshchallenge_wordsearch.data.sources.remote.networkmodel.Word
 import com.example.coodeshchallenge_wordsearch.ui.model.WordDTO
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
@@ -13,7 +12,6 @@ interface DictionaryProvider {
 
     suspend fun getPaginatedWordsList(scope: CoroutineScope): Flow<PagingData<DictionaryEntryEntity>>
 
-    //    suspend fun getRandomWordEntry(): WordDTO
     suspend fun getRandomDictionaryEntry(): DictionaryEntryEntity
 
     suspend fun getFavoriteWords(): List<WordDTO>
@@ -31,8 +29,6 @@ interface DictionaryProvider {
     suspend fun removeWordFromSearchHistory(word: String)
 
     suspend fun clearSearchHistory()
-
-//    suspend fun getWordDefinition(word: String): WordDTO
 
     suspend fun populateDatabaseFromFile(listOfWords: List<String>)
 

@@ -53,7 +53,7 @@ class DictionaryApp : Application() {
         }
 
         val dataModule = module {
-            factory<DictionaryProvider> { DictionaryProviderImpl(get(), get(), get(), get(), get()) }
+            factory<DictionaryProvider> { DictionaryProviderImpl(get(), get(), get(), get()) }
 
             single<DictionaryEntriesRepository> { DictionaryEntriesRepositoryImpl(get(), get()) }
 

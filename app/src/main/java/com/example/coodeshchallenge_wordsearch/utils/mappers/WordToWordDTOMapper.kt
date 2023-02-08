@@ -17,7 +17,6 @@ class WordToWordDTOMapper(private val meaningToMeaningDTOMapper: MeaningToMeanin
     }
 }
 
-
 class MeaningToMeaningDTOMapper : DataMapper<Meaning, MeaningDTO>() {
     override fun toDomain(data: Meaning): MeaningDTO = data.let {
         MeaningDTO(

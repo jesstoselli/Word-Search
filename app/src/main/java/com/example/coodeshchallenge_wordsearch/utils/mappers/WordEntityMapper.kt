@@ -16,10 +16,6 @@ class WordEntityMapper(private val meaningEntityMapper: MeaningEntityMapper) : D
             favorite = false
         )
     }
-
-    fun toDomainList(wordsList: List<Word>): List<WordEntity> {
-        return wordsList.map { toDomain(it) }
-    }
 }
 
 class MeaningEntityMapper : DataMapper<Meaning, MeaningEntity>() {

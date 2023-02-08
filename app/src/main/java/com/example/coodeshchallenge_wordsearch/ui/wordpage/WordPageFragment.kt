@@ -38,19 +38,6 @@ class WordPageFragment : Fragment() {
         super.onCreate(savedInstanceState)
 
         (requireActivity() as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(false)
-
-//        val onBackPressedCallback = object : OnBackPressedCallback(true) {
-//            override fun handleOnBackPressed() {
-//                val action = when (args.origin) {
-//                    "Dictionary" -> findNavController().popBackStack(R.id.navigation_dictionary, false)
-//                    "History" -> findNavController().popBackStack(R.id.navigation_history, false)
-//                    "Favorites" -> findNavController().popBackStack(R.id.navigation_favorites, false)
-//                    else -> findNavController().popBackStack(R.id.navigation_dictionary, false)
-//                }
-//            }
-//        }
-//
-//        requireActivity().onBackPressedDispatcher.addCallback(this, onBackPressedCallback)
     }
 
     override fun onCreateView(
@@ -59,16 +46,6 @@ class WordPageFragment : Fragment() {
     ): View {
 
         _binding = FragmentWordPageBinding.inflate(layoutInflater)
-
-//        requireActivity().onBackPressedDispatcher.addCallback(this, onBackPressedCallback)
-//
-//            fun onBackPressedCallback
-//            () -> {
-//            navController.popBackStack(R.id.homeFragment, false);
-//        });
-//        return true;
-//    });
-
 
         val originFragment = args.origin
 
@@ -122,7 +99,6 @@ class WordPageFragment : Fragment() {
             }
 
             imageViewToggleFavoriteWord.setOnClickListener {
-//                toggleFavorite(viewModel.selectedWord)
                 viewModel.selectedWord.value?.let { word -> toggleFavorite(word) }
             }
         }

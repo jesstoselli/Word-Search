@@ -18,7 +18,6 @@ class WordDTOToWordEntityMapper(private val meaningDTOToMeaningEntityMapper: Mea
     }
 }
 
-
 class MeaningDTOToMeaningEntityMapper : DataMapper<MeaningDTO, MeaningEntity>() {
 
     override fun toDomain(data: MeaningDTO): MeaningEntity = data.let {

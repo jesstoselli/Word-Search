@@ -26,19 +26,3 @@ class DictionaryEntryDataSource(private val dictionaryEntriesDao: DictionaryEntr
         }
     }
 }
-
-//private companion object {
-//        const val INITIAL_PAGE_INDEX = 0
-//    }
-//
-//    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, DictionaryEntryEntity> {
-//        val position = params.key ?: INITIAL_PAGE_INDEX
-//        val randomPosts = dictionaryEntriesDao.getRandomWordItems(params.loadSize)
-//        return LoadResult.Page(
-//            data = randomPosts,
-//            prevKey = if (position == INITIAL_PAGE_INDEX) null else position - 1,
-//            nextKey = if (randomPosts.isEmpty()) null else position + 1
-//        )
-//    }
-//
-//    override fun getRefreshKey(state: PagingState<Int, DictionaryEntryEntity>): Int? = null

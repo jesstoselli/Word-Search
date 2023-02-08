@@ -5,7 +5,6 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.coodeshchallenge_wordsearch.data.sources.local.entities.DictionaryEntryEntity
-import com.example.coodeshchallenge_wordsearch.data.sources.local.entities.WordEntity
 
 @Dao
 interface DictionaryEntriesDao {
